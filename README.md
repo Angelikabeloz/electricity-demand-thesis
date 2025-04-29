@@ -87,4 +87,19 @@ This notebook implements the following steps:
 ### Alternative Normalization
 - An additional model specification normalizes demand by peak demand per bidding zone per year.
 
+## Model_2: Conditional Estimator
+
+The folder `Model_2` contains the notebook `lags.ipynb`.
+
+This notebook tests a **Conditional Model** that accounts for autocorrelation by including lags of the instrument variable.
+
+### Main Steps:
+- Created **50 lags** of the instrument (`Total_Wind_Generation`).
+- Included these lagged variables in the **covariate set**.
+- Ran the Double Machine Learning model using the same general specifications and variables as in Model_1.
+
+### Additional Models Provided:
+- **Traditional IV model** using the extended covariate set (with lags).
+- **Feature selection model**, where only the most important features are kept based on feature importance analysis.
+
 
