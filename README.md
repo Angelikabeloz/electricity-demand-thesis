@@ -32,3 +32,59 @@ Instead, a **sample dataset** is provided in this repository, created by randoml
 
 - All variable creation, cleaning, and preprocessing steps can be found in the `processing_data.ipynb` notebook.
 
+## Model_1: Naive Model Estimation
+
+The folder `Model_1` contains the file `naive_model.ipynb`.
+
+This notebook implements the following steps:
+
+### Outlier Removal
+- 21 rows identified as outliers from previous model runs are removed.
+
+### Normalization
+- A normalized electricity demand variable is created by dividing consumption by the mean demand within each bidding zone and year.
+
+### Feature Engineering
+- Interactions are created between solar generation and hour blocks, and between temperature and hour blocks.
+- Offshore and onshore wind generation are combined into a single `Total_Wind_Generation` variable.
+
+### Model Estimation
+- The model is estimated using the `dml_rolling_window` function.
+  - Hyperparameters were selected manually based on previous grid search results optimized for this model specification.
+  - The function also allows you to either **automatically tune** hyperparameters or **manually set them**.
+
+### Double Machine Learning Output
+- The model estimates a DML with the following:
+  - **Outcome variable**: `consumption_normalized`
+  - **Treatment variable(s)**: `DayAheadPriceEUR`
+  - **Instrument variable(s)**: `Total_Wind_Generation`
+  - **Cluster variable(s)**: `Country` (for robust standard errors)
+  - **Covariates**:  
+    - Dummies for hour of the week
+    - Fixed effects for bidding zones (`PriceArea`)
+    - Interactions
+    - Fossil fuel prices (`Price_gas`, `Price_coal`, `Price_EUA`)
+    - Month dummies
+
+### Prediction Outputs
+- First 500 predicted vs actual values for demand, based on controls estimated via XGBoost.
+- Test errors (MAE, RMSE, R²) separately calculated for each rolling window for:
+  - Learner \( l \) (outcome vs controls)
+  - Learner \( r \) (treatment vs controls)
+  - Learner \( m \) (instrument vs controls)
+
+### Overall Metrics
+- Aggregated Train MAE, RMSE, R² across all training windows.
+- Aggregated Test MAE, RMSE, R² across all testing windows.
+
+### Benchmark Traditional IV Model
+- A standard IV model with the same specification is also estimated for comparison.
+
+### Feature Selection Variant
+- Another model is estimated using only the top 50 most important features (based on feature importance from XGBoost).
+- The corresponding IV model based on feature selection is also provided.
+
+### Alternative Normalization
+- An additional model specification normalizes demand by peak demand per bidding zone per year.
+
+
