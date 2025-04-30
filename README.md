@@ -128,5 +128,16 @@ This folder contains the notebook `visualisation.ipynb`, which produces all key 
 - Comparison plots with confidence intervals across different model specifications  
 - Predicted vs. actual demand plots  
 - Feature importance charts  
-- Regression results on smart meter rollout and demand elasticity  
+- Regression results on smart meter rollout and demand elasticity
+
+## Folder: `Individual_bidding_zones`
+
+This folder contains the notebook `zone_variable.ipynb`, which estimates the Model 5 specification separately for each bidding zone (country-level analysis). The notebook includes three versions of the model:
+
+1. **Log-transformed model with normalized demand** – demand is normalized by annual mean and then log-transformed.  
+2. **Model without log transformation but with normalized demand** – estimates in absolute values but scaled by zone/year.  
+3. **Log-transformed model without normalization** – demand is used in absolute terms but log-transformed to capture relative changes.
+
+These models allow for a detailed comparison of elasticity across countries using consistent methods.
+
 
