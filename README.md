@@ -103,3 +103,19 @@ This notebook tests a **Conditional Model** that accounts for autocorrelation by
 - **Feature selection model**, where only the most important features are kept based on feature importance analysis.
 
 
+## Model_3: Lagged Demand Estimator
+
+The folder `Model_3` contains the notebook `lag_of_demand.ipynb`.
+
+This notebook estimates **Model 3** from the thesis, which includes the **lag of electricity demand** as a covariate in the conditional set.
+
+### Main Steps:
+- Created a lag of the dependent variable (`Consumption_normalized`).
+- Included the lag in the **control set** to capture autocorrelation effects.
+- Estimated:
+  - Double Machine Learning (DML) model
+  - Traditional IV regression
+  - DML model with **top 50 features** based on feature importance
+
+### Key Insights:
+While this model shows **strong predictive performance** (as evident in the plots), the lagged demand variable absorbs much of the variation in the outcome. As a result, the model **does not accurately isolate the causal effect** of price on demand. Therefore, it is **better suited for forecasting** rather than causal analysis of price responsiveness.
