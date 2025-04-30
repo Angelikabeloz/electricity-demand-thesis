@@ -119,3 +119,14 @@ This notebook estimates **Model 3** from the thesis, which includes the **lag of
 
 ### Key Insights:
 While this model shows **strong predictive performance** (as evident in the plots), the lagged demand variable absorbs much of the variation in the outcome. As a result, the model **does not accurately isolate the causal effect** of price on demand. Therefore, it is **better suited for forecasting** rather than causal analysis of price responsiveness.
+
+
+## Folder: `visualisation`
+
+This folder contains the notebook `visualisation.ipynb`, which produces all key figures used in the thesis. The visualizations include:
+
+- Comparison plots with confidence intervals across different model specifications  
+- Predicted vs. actual demand plots  
+- Feature importance charts  
+- Regression results on smart meter rollout and demand elasticity  
+
